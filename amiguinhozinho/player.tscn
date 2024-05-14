@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdth0d77cudon"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_wxis3"]
+[ext_resource type="Texture2D" uid="uid://6mnb0b3v7nh4" path="res://art/playerGrey_up1.png" id="2_qeik1"]
+[ext_resource type="Texture2D" uid="uid://qv8fy337p3ty" path="res://art/playerGrey_up2.png" id="3_osfjn"]
+[ext_resource type="Texture2D" uid="uid://lvmc56j3rk03" path="res://art/playerGrey_walk1.png" id="4_5hqxi"]
+[ext_resource type="Texture2D" uid="uid://gvh8650bhdkj" path="res://art/playerGrey_walk2.png" id="5_t2f4w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cr5ki"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qeik1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_osfjn")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5hqxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_t2f4w")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hltl2"]
+radius = 23.0
+height = 46.0
+
+[node name="player" type="Area2D"]
+script = ExtResource("1_wxis3")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_cr5ki")
+animation = &"walk"
+frame_progress = 0.431745
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CapsuleShape2D_hltl2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
