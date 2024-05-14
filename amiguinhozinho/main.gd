@@ -21,6 +21,7 @@ func new_game():
 	get_tree().call_group("mobs", "queue_free")
 
 func _on_score_timer_timeout():
+	print(score)
 	score += 1
 	$HUD.update_score(score)
 
